@@ -4,7 +4,7 @@ import json
 import psycopg2
 import io
 import os
-
+import datetime
 
 URLS_FILE="ads_metadata_urls.txt"
 
@@ -73,6 +73,13 @@ for url in urls:
         # Parse the line as a JSON object
         book = json.loads(line)
 
+            # Convert the pubdate to a datetime object
+        try:
+            pubdate = datetime.strptime(book['pubdate'], '%Y-%m-%d')
+        except ValueError:
+            # If the date is invalid, use the first day of the year
+            pubdate = datetime.strptime(book['pubdate'][:4] + '-01-01', '%Y-%m-%d')
+
         # Execute the SQL statement
         cur.execute("""
         INSERT INTO books (bibcode, author, bibstem, doctype, doi, id, identifier, pub, pubdate, title, institution, keyword_schema, keyword, keyword_norm, abstract)
@@ -92,7 +99,7 @@ for url in urls:
         keyword = EXCLUDED.keyword,
         keyword_norm = EXCLUDED.keyword_norm,
         abstract = EXCLUDED.abstract;
-        """, (book['bibcode'], book['author'], book['bibstem'], book['doctype'], book['doi'], book['id'], book['identifier'], book['pub'], book['pubdate'], book['title'], book['institution'], book['keyword_schema'], book['keyword'], book['keyword_norm'], book['abstract']))
+        """, (book['bibcode'], book['author'], book['bibstem'], book['doctype'], book['doi'], book['id'], book['identifier'], book['pub'], pubdate, book['title'], book['institution'], book['keyword_schema'], book['keyword'], book['keyword_norm'], book['abstract']))
     
     # Commit the changes
     conn.commit()
