@@ -5,8 +5,18 @@ import psycopg2
 import io
 import os
 from datetime import datetime
+import argparse
+
+# Parse command-line arguments
+parser = argparse.ArgumentParser()
+parser.add_argument('--start-url', help='URL to start processing from')
+args = parser.parse_args()
+
 
 URLS_FILE="ads_metadata_urls.txt"
+
+start_url = '' # a line in the URLs file
+create_db = False # should the db schema be created
 
 # Get the database username and password from environment variables
 db_user = os.getenv('PG_DB_USER')
@@ -19,36 +29,46 @@ conn = psycopg2.connect(f"dbname=ads user={db_user} password={db_password}")
 # Open a cursor to perform database operations
 cur = conn.cursor()
 
-# Create table
-cur.execute("""
-CREATE TABLE books (
-    bibcode TEXT PRIMARY KEY,
-    author TEXT[],
-    bibstem TEXT[],
-    doctype TEXT,
-    doi TEXT[],
-    id TEXT,
-    identifier TEXT[],
-    pub TEXT,
-    pubdate DATE,
-    title TEXT[],
-    institution TEXT,
-    keyword_schema TEXT,
-    keyword TEXT,
-    keyword_norm TEXT,
-    abstract TEXT
-);
-""")
+if create_db:
+    # Create table
+    cur.execute("""
+    CREATE TABLE books (
+        bibcode TEXT PRIMARY KEY,
+        author TEXT[],
+        bibstem TEXT[],
+        doctype TEXT,
+        doi TEXT[],
+        id TEXT,
+        identifier TEXT[],
+        pub TEXT,
+        pubdate DATE,
+        title TEXT[],
+        institution TEXT,
+        keyword_schema TEXT,
+        keyword TEXT,
+        keyword_norm TEXT,
+        abstract TEXT
+    );
+    """)
 
-# Commit the changes
-conn.commit()
+    # Commit the changes
+    conn.commit()
+
 
 # Open the file with the list of URLs
 with open(URLS_FILE, 'r') as file:
     urls = file.readlines()
 
+# Find the index of the starting URL in the list of URLs
+start_index = 0
+if args.start_url:
+    try:
+        start_index = urls.index(args.start_url + '\n')
+    except ValueError:
+        print(f"Warning: starting URL '{args.start_url}' not found in URL list")
+
 # Go through each URL
-for url in urls:
+for url in urls[start_index:]:
     url = url.strip()
     print(url)
 
