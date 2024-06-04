@@ -60,9 +60,12 @@ for url in urls:
     # Convert the bytes to string
     json_str = zipped_file.decode('utf-8')
 
-    # Load the JSON
-    data = json.loads(json_str)
-
+    try:
+        # Load the JSON
+        data = json.loads(json_str)
+    except Exception as e:
+        continue
+    
     # Convert each book entry to a SQL statement and load it to the database
     for book in data:
         cur.execute("""
