@@ -6,12 +6,14 @@ import io
 import os
 
 
+URLS_FILE="ads_metadata_urls.txt"
+
 # Get the database username and password from environment variables
 db_user = os.getenv('PG_DB_USER')
 db_password = os.getenv('PG_DB_PASSWORD')
 
 # Connect to your postgres DB
-conn = psycopg2.connect(f"dbname=test user={db_user} password={db_password}")
+conn = psycopg2.connect(f"dbname=ads user={db_user} password={db_password}")
 
 
 # Open a cursor to perform database operations
@@ -42,7 +44,7 @@ CREATE TABLE books (
 conn.commit()
 
 # Open the file with the list of URLs
-with open('urls.txt', 'r') as file:
+with open(URLS_FILE, 'r') as file:
     urls = file.readlines()
 
 # Go through each URL
