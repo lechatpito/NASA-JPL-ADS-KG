@@ -72,14 +72,18 @@ for url in urls[start_index:]:
     url = url.strip()
     print(url)
 
-    # Download the file
-    r = requests.get(url)
+    try:
+        # Download the file
+        r = requests.get(url)
 
-    # Unzip the file
-    zipped_file = gzip.decompress(r.content)
+        # Unzip the file
+        zipped_file = gzip.decompress(r.content)
 
-    # Convert the bytes to string
-    json_str = zipped_file.decode('utf-8')
+        # Convert the bytes to string
+        json_str = zipped_file.decode('utf-8')
+    except Exception as e:
+        print(e)
+        continue
 
     # Split the string into lines
     lines = json_str.split('\n')
