@@ -4,7 +4,7 @@ import json
 import psycopg2
 import io
 import os
-import datetime
+from datetime import datetime
 
 URLS_FILE="ads_metadata_urls.txt"
 
