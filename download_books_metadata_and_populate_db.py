@@ -60,7 +60,7 @@ for url in urls:
 
     # Convert the bytes to string
     json_str = zipped_file.decode('utf-8')
-    
+
     # Split the string into lines
     lines = json_str.split('\n')
 
@@ -72,7 +72,7 @@ for url in urls:
 
         # Parse the line as a JSON object
         book = json.loads(line)
-        
+
         # Convert each book entry to a SQL statement and load it to the database
         for book in data:
             cur.execute("""
