@@ -1,0 +1,113 @@
+@prefix data:        <http://mydata.example.org/> .
+@prefix dcat:        <http://www.w3.org/ns/dcat#> .
+@prefix dcmitype:    <http://purl.org/dc/dcmitype/> .
+@prefix dcterms:     <http://purl.org/dc/terms/> .
+@prefix foaf:        <http://xmlns.com/foaf/0.1/> .
+@prefix geo:         <http://www.opengis.net/ont/geosparql#> .
+@prefix owl:         <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema:      <http://schema.org/> .
+@prefix schema_ext1: <https://schema.org/> .
+@prefix skos:        <http://www.w3.org/2004/02/skos/core#> .
+@prefix voc:         <http://vocabulary.example.org/> .
+@prefix void:        <http://rdfs.org/ns/void#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+
+[ <http://www.w3.org/ns/r2rml#logicalTable>
+          [ <http://www.w3.org/ns/r2rml#sqlQuery>
+                    "SELECT v1.\"abstract\" AS \"abstract\", v1.\"author\" AS \"author\", v1.\"bibcode\" AS \"bibcode\", v1.\"bibstem\" AS \"bibstem\", 'book' AS \"doctype\", v1.\"doi\" AS \"doi\", v1.\"id\" AS \"id\", v1.\"identifier\" AS \"identifier\", v1.\"institution\" AS \"institution\", v1.\"keyword\" AS \"keyword\", v1.\"keyword_norm\" AS \"keyword_norm\", v1.\"keyword_schema\" AS \"keyword_schema\", v1.\"pub\" AS \"pub\", v1.\"pubdate\" AS \"pubdate\", v1.\"title\" AS \"title\"\nFROM \"books\" v1\nWHERE 'book' = v1.\"doctype\"\n" ];
+  <http://www.w3.org/ns/r2rml#predicateObjectMap>
+          [ <http://www.w3.org/ns/r2rml#objectMap>
+                    [ <http://www.w3.org/ns/r2rml#column>
+                              "\"pubdate\"";
+                      <http://www.w3.org/ns/r2rml#datatype>
+                              xsd:date;
+                      <http://www.w3.org/ns/r2rml#termType>
+                              <http://www.w3.org/ns/r2rml#Literal>
+                    ];
+            <http://www.w3.org/ns/r2rml#predicateMap>
+                    [ <http://www.w3.org/ns/r2rml#constant>
+                              schema_ext1:datePublished ]
+          ];
+  <http://www.w3.org/ns/r2rml#subjectMap>
+          [ <http://www.w3.org/ns/r2rml#template>
+                    "ads/books/{\"id\"}";
+            <http://www.w3.org/ns/r2rml#termType>
+                    <http://www.w3.org/ns/r2rml#IRI>
+          ]
+] .
+
+[ <http://www.w3.org/ns/r2rml#logicalTable>
+          [ <http://www.w3.org/ns/r2rml#sqlQuery>
+                    "SELECT v1.\"abstract\" AS \"abstract\", v1.\"author\" AS \"author\", v1.\"bibcode\" AS \"bibcode\", v1.\"bibstem\" AS \"bibstem\", 'book' AS \"doctype\", v1.\"doi\" AS \"doi\", v1.\"id\" AS \"id\", v1.\"identifier\" AS \"identifier\", v1.\"institution\" AS \"institution\", v1.\"keyword\" AS \"keyword\", v1.\"keyword_norm\" AS \"keyword_norm\", v1.\"keyword_schema\" AS \"keyword_schema\", v1.\"pub\" AS \"pub\", v1.\"pubdate\" AS \"pubdate\", v1.\"title\" AS \"title\"\nFROM \"books\" v1\nWHERE 'book' = v1.\"doctype\"\n" ];
+  <http://www.w3.org/ns/r2rml#subjectMap>
+          [ <http://www.w3.org/ns/r2rml#class>
+                    schema_ext1:Book;
+            <http://www.w3.org/ns/r2rml#template>
+                    "ads/books/{\"id\"}";
+            <http://www.w3.org/ns/r2rml#termType>
+                    <http://www.w3.org/ns/r2rml#IRI>
+          ]
+] .
+
+[ <http://www.w3.org/ns/r2rml#logicalTable>
+          [ <http://www.w3.org/ns/r2rml#sqlQuery>
+                    "SELECT v1.\"abstract\" AS \"abstract\", v1.\"author\" AS \"author\", v1.\"bibcode\" AS \"bibcode\", v1.\"bibstem\" AS \"bibstem\", 'article' AS \"doctype\", v1.\"doi\" AS \"doi\", v1.\"id\" AS \"id\", v1.\"identifier\" AS \"identifier\", v1.\"institution\" AS \"institution\", v1.\"keyword\" AS \"keyword\", v1.\"keyword_norm\" AS \"keyword_norm\", v1.\"keyword_schema\" AS \"keyword_schema\", v1.\"pub\" AS \"pub\", v1.\"pubdate\" AS \"pubdate\", v1.\"title\" AS \"title\"\nFROM \"books\" v1\nWHERE 'article' = v1.\"doctype\"\n" ];
+  <http://www.w3.org/ns/r2rml#subjectMap>
+          [ <http://www.w3.org/ns/r2rml#class>
+                    schema_ext1:ScholarlyArticle;
+            <http://www.w3.org/ns/r2rml#template>
+                    "ads/articles/{\"id\"}";
+            <http://www.w3.org/ns/r2rml#termType>
+                    <http://www.w3.org/ns/r2rml#IRI>
+          ]
+] .
+
+[ <http://www.w3.org/ns/r2rml#logicalTable>
+          [ <http://www.w3.org/ns/r2rml#sqlQuery>
+                    "SELECT v1.\"abstract\" AS \"abstract\", v1.\"author\" AS \"author\", v1.\"bibcode\" AS \"bibcode\", v1.\"bibstem\" AS \"bibstem\", 'book' AS \"doctype\", v1.\"doi\" AS \"doi\", v1.\"id\" AS \"id\", v1.\"identifier\" AS \"identifier\", v1.\"institution\" AS \"institution\", v1.\"keyword\" AS \"keyword\", v1.\"keyword_norm\" AS \"keyword_norm\", v1.\"keyword_schema\" AS \"keyword_schema\", v1.\"pub\" AS \"pub\", v1.\"pubdate\" AS \"pubdate\", v1.\"title\" AS \"title\"\nFROM \"books\" v1\nWHERE 'book' = v1.\"doctype\"\n" ];
+  <http://www.w3.org/ns/r2rml#predicateObjectMap>
+          [ <http://www.w3.org/ns/r2rml#objectMap>
+                    [ <http://www.w3.org/ns/r2rml#column>
+                              "\"author\"";
+                      <http://www.w3.org/ns/r2rml#datatype>
+                              xsd:string;
+                      <http://www.w3.org/ns/r2rml#termType>
+                              <http://www.w3.org/ns/r2rml#Literal>
+                    ];
+            <http://www.w3.org/ns/r2rml#predicateMap>
+                    [ <http://www.w3.org/ns/r2rml#constant>
+                              schema_ext1:author ]
+          ];
+  <http://www.w3.org/ns/r2rml#subjectMap>
+          [ <http://www.w3.org/ns/r2rml#template>
+                    "ads/books/{\"id\"}";
+            <http://www.w3.org/ns/r2rml#termType>
+                    <http://www.w3.org/ns/r2rml#IRI>
+          ]
+] .
+
+[ <http://www.w3.org/ns/r2rml#logicalTable>
+          [ <http://www.w3.org/ns/r2rml#sqlQuery>
+                    "SELECT v1.\"abstract\" AS \"abstract\", v1.\"author\" AS \"author\", v1.\"bibcode\" AS \"bibcode\", v1.\"bibstem\" AS \"bibstem\", 'book' AS \"doctype\", v1.\"doi\" AS \"doi\", v1.\"id\" AS \"id\", v1.\"identifier\" AS \"identifier\", v1.\"institution\" AS \"institution\", v1.\"keyword\" AS \"keyword\", v1.\"keyword_norm\" AS \"keyword_norm\", v1.\"keyword_schema\" AS \"keyword_schema\", v1.\"pub\" AS \"pub\", v1.\"pubdate\" AS \"pubdate\", v1.\"title\" AS \"title\"\nFROM \"books\" v1\nWHERE 'book' = v1.\"doctype\"\n" ];
+  <http://www.w3.org/ns/r2rml#predicateObjectMap>
+          [ <http://www.w3.org/ns/r2rml#objectMap>
+                    [ <http://www.w3.org/ns/r2rml#column>
+                              "\"title\"";
+                      <http://www.w3.org/ns/r2rml#datatype>
+                              xsd:string;
+                      <http://www.w3.org/ns/r2rml#termType>
+                              <http://www.w3.org/ns/r2rml#Literal>
+                    ];
+            <http://www.w3.org/ns/r2rml#predicateMap>
+                    [ <http://www.w3.org/ns/r2rml#constant>
+                              schema_ext1:title ]
+          ];
+  <http://www.w3.org/ns/r2rml#subjectMap>
+          [ <http://www.w3.org/ns/r2rml#template>
+                    "ads/books/{\"id\"}";
+            <http://www.w3.org/ns/r2rml#termType>
+                    <http://www.w3.org/ns/r2rml#IRI>
+          ]
+] .
